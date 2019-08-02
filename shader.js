@@ -45,8 +45,8 @@ class Shader {
             buffers: {},
             camera: {},
             texture: {},
-            onResize: () => {},
-            onUpdate: () => {},
+            onResize: (() => {}),
+            onUpdate: (() => {}),
         }
 
         options = Object.assign(preset, options);
@@ -165,7 +165,11 @@ class Shader {
                 0, 0, camera.near * camera.far * rangeInv * 2, 0
             ];
 
+            matrix[14] += camera.z;
+            matrix[15] += camera.z;
+
             return matrix;
+            
         } else {
             return [
                 2 / this.width, 0, 0, 0,
